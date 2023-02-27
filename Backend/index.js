@@ -41,6 +41,7 @@ const query = 'SELECT * FROM partidas';
         }
     }
   });
+  connection.end();
 });
 
 /**
@@ -65,6 +66,7 @@ app.post('/CreatePartida',(req,res) => {
           }
       }
     })
+    connection.end();
 });
 
 /**
@@ -87,6 +89,7 @@ app.post('/UpdatePartida',(req,res) => {
         }
     }
   })
+  connection.end();
 });
 
 /**
@@ -107,6 +110,7 @@ app.post('/DeletePartida',(req,res) => {
         }
     }
   });  
+  connection.end();
 });
 
 
@@ -134,6 +138,7 @@ app.post('/login', (req, res) => {
           }
         }
       })//end of connection query
+      connection.end();
      
 });
 
@@ -157,6 +162,7 @@ app.post('/register', async (req, res) => {
       res.status(200).send(JSON.stringify("User Added Correctly"))
     }
   })
+  connection.end();
 });
 
 
