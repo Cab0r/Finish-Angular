@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   public user!: User;
   public newUser!: User;
+  public showError404: boolean = false;
   
   
   public username!: string;
@@ -42,10 +43,17 @@ export class LoginComponent implements OnInit {
     this.newUser = new User(this.LoginForm.get(['username'])?.value, this.LoginForm.get(['password'])?.value, this.email);
 
     this.httpService.sendLogin(this.newUser).subscribe(res => {
-      console.log(res)
+      
         localStorage.setItem('User_Token', res.Acces_Token);
-        this.router.navigate(['/Home']);
-    });   
+        this.router.navigate(['/']);
+      
+      }, (error) => {
+        if (error.status === 404) {
+          this.showError404 = true;
+        } else {
+          alert("Error 500");
+        }
+      });   
 
   }
 

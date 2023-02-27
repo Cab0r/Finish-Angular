@@ -33,15 +33,15 @@ app.get('/partidas',(req,res) => {
 const query = 'SELECT * FROM partidas';
 
   connection.query(query, (err, result) => {
-    if (err){
+    try {
+      if(result != 0){
+        res.json(result);
+      }
+    } catch (error) {
       res.status(500).send({ results: null });
-    } else {
-        if(result != 0){
-          res.json(result);
-        }
+
     }
   });
-  connection.end();
 });
 
 /**
@@ -53,7 +53,7 @@ app.post('/CreatePartida',(req,res) => {
   const { id, juego, jugadores,fecha,hora,ganador } = req.body;
 
   const query = `INSERT INTO partidas (id, juego, jugadores, fecha, hora, ganador) VALUES ('${id}', '${juego}', '${jugadores}', '${fecha}', '${hora}', '${ganador}');`;
-  
+
     connection.query(query , (err, result) => {
       if (err){
         res.status(500).send({ results: null });
@@ -66,7 +66,6 @@ app.post('/CreatePartida',(req,res) => {
           }
       }
     })
-    connection.end();
 });
 
 /**
@@ -77,6 +76,7 @@ app.post('/UpdatePartida',(req,res) => {
 
   const {id, juego, jugadores, fecha,hora,ganador} = req.body;
   const query = `Update partidas set juego='${juego}',jugadores='${jugadores}',fecha='${fecha}',hora='${hora}',ganador='${ganador}' WHERE id = '${id}'`
+  connection.connect();
   connection.query(query , (err, result) => {
     if (err){
       console.log(err);
@@ -98,19 +98,17 @@ app.post('/UpdatePartida',(req,res) => {
  */
 app.post('/DeletePartida',(req,res) => {
   const query = 'DELETE FROM partidas WHERE id = ' + req.body.id;
-
-  connection.query(query, (err, result) => {
-    if (err){
-      res.status(500).send({ results: null });
-    } else {
+    connection.query(query, (err, result) => {
+      try {
         if(result != 0){
           res.json(result);
         }else{
           res.status(404).send({results: null});
         }
-    }
-  });  
-  connection.end();
+      } catch (error) {
+        res.status(500).send({ results: null });
+      }
+    });  
 });
 
 
@@ -118,28 +116,26 @@ app.post('/DeletePartida',(req,res) => {
  * gets the Username and password from the User service in angular and tries to
  * compare the username and password to login and return a token for the user
  */
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   console.log(req.body);
   const { _username, _password } = req.body;
+
+  const hash = await bcrypt.hash(_password, 1);
+
   const query = `SELECT * FROM users WHERE email = '${_username}'`;
+  connection.connect();
       connection.query(query, function (error, results, field) {
-        if (error) {
-          console.log(error);
-          res.status(500).send({ results: null });
-        } else {//si todos OK.
-          //si el usuario existe.
           if(results.length != 0){
             const token = jwt.sign(JSON.stringify({user: _username}), 'secretpassword');
-            return res.status(200).send({'Acces_Token': token});
+            return res.status(200).send({'Acces_Token': token, 'status':'success'});
             //si no hay usurio execute error
           }else{
-            res.status(404).send({ results: null });
-
+            res.status(404).send({'status':'Not Found'});
           }
-        }
-      })//end of connection query
-      connection.end();
-     
+       
+      })  
+    connection.end();
+
 });
 
 /**
@@ -156,13 +152,12 @@ app.post('/register', async (req, res) => {
   let query = `INSERT INTO users (name, email, password, role) VALUES ('${_username}', '${_email}', '${hash}', 'User')`;
 
    connection.query(query, function (error, results, field) {
-    if (error) {
-      res.status(400).send({ results: error })
-    } else {//si todos OK.
-      res.status(200).send(JSON.stringify("User Added Correctly"))
+    try {
+      res.status(200).send({"status":"success"});
+    } catch (error) {
+      res.status(400).send({ results: "error" })
     }
   })
-  connection.end();
 });
 
 

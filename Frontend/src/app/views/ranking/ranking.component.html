@@ -30,6 +30,18 @@
             </tr>
         </tbody>
     </table>
+
+    <div *ngIf="showError500"  class="alert alert-danger">
+        <p style="color: red">Cannot do Delete the ranking</p>
+    </div>
+
+    <div *ngIf="showError404"  class="alert alert-warning">
+        <p style="color: red">Cannot do register new user</p>
+    </div>
+
+    <div *ngIf="showSuccess"  class="alert alert-success">
+        <p style="color: black">ranking Deleted Sucessfully</p>
+    </div>
     <!--Go to create Ranking Form-->
     <button class="btn btn-primary" (click)="GoToRankingForm()">Go to create new data</button>
     <!--Update form-->

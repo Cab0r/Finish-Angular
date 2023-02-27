@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { timeout } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/service/user.service';
 
@@ -11,8 +13,9 @@ import { UserService } from 'src/app/service/user.service';
 export class RegisterComponent implements OnInit {
 
   public user!: User;
-
-  constructor(public usersService: UserService) { }
+  public showError400: boolean = false;
+  public showSuccess: boolean = false;
+  constructor(public usersService: UserService, public router: Router) { }
 
   registerform = new FormGroup({
     name: new FormControl('', [
@@ -50,6 +53,22 @@ export class RegisterComponent implements OnInit {
 
     console.log(this.user);
 
-    this.usersService.sendRegister(this.user).subscribe((res: any) => {console.log(res)});
+    this.usersService
+      .sendRegister(this.user)
+      .subscribe(
+        (res: any) => {
+          this.showError400 = false;
+          this.showSuccess = true;
+          setTimeout(() => {
+            this.router.navigate(['/Login']);
+          }, 3000);
+        }, (error) => {
+          if (error.status === 400) {
+            this.showError400 = true;
+            this.showSuccess = false;
+          } else {
+
+          }
+        });
   }
 }

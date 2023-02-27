@@ -68,6 +68,12 @@
                                 placeholder="Password" />
                         </div>
 
+                        <!--if Error-->
+                        <div *ngIf="showError404"  class="alert alert-warning">
+                            <p style="color: red">Cannot do Login maybe credentials are incorrect</p>
+                        </div>
+
+
                         <!-- Submit button -->
                         <div class="text-center">
                             <button type="button" class="btn btn-primary btn-block mb-4" (click)="sendLogin()">Sing in</button>

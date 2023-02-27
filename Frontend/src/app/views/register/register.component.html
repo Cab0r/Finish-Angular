@@ -180,6 +180,14 @@
 
                     </form>
 
+                    <div *ngIf="showError400"  class="alert alert-warning">
+                        <p style="color: red">Cannot do register new user</p>
+                    </div>
+
+                    <div *ngIf="showSuccess"  class="alert alert-success">
+                        <p style="color: black">User Added Sucessfully</p>
+                    </div>
+
                 </div>
             </div>
         </div>
