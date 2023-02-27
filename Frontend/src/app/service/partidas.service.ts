@@ -27,5 +27,10 @@ export class PartidasService {
   createPartida(partida:Partida):Observable<Partida[]>{
     return this.httpService.post<Partida[]>('http://localhost:3001/CreatePartida',partida);
   }
-  
+
+ 
+  Update(partida:Partida):Observable<Partida[]> {
+    return this.httpService.post<Partida[]>('http://localhost:3001/UpdatePartida',partida);
+  }
+
 }

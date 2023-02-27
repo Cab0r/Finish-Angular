@@ -116,5 +116,8 @@ export class RankingComponent implements OnInit {
     this.router.navigate(['/Create']);
   }
 
+  ToUpdate(): void {
+    this.router.navigate(['/Update',this.selectedRanking.id]); //
+  }
 }
 

@@ -26,7 +26,7 @@
                 <td>{{Ranking.hora}}</td>
                 <td>{{Ranking.ganador}}</td>
                 <td><button class="btn btn-primary" (click)="DeleteRanking(Ranking)">Delete</button></td>
-                <td><button class="btn btn-primary" (click)="ShowUpdateForm()">Modify</button></td>
+                <td *ngIf="selectedRanking"><button  class="btn btn-primary" (click)="ToUpdate()">Modify</button></td>
             </tr>
         </tbody>
     </table>
@@ -39,7 +39,7 @@
         </div> 
     </div>
     <br>
-    <form [formGroup]="UpdateForm" [ngStyle]="{'display': displayForm ? 'block':'none'}" action="" method="get">
+    <!-- <form [formGroup]="UpdateForm" [ngStyle]="{'display': displayForm ? 'block':'none'}" action="" method="get">
         <h1>Update</h1>
         <label for="id">
             <p>ID</p>
@@ -67,5 +67,5 @@
         </label>
         <br>
         <input (click)="Update(selectedRanking)" value="Envia" class="btn btn-primary" type="submit" name="" id="">
-    </form>
+    </form> -->
 </div>

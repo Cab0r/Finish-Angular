@@ -13,11 +13,9 @@ var connection = mysql.createConnection({
     host: 'localhost',
     database: 'bd',
     user: 'root',
-    password: 'alumne'
+    password: ''
 
 });
-
-
 
 app.use(cors());
 app.use( bodyParser.urlencoded({ extended: false }) );
@@ -73,8 +71,22 @@ app.post('/CreatePartida',(req,res) => {
  * gets the object partida
  */
 app.post('/UpdatePartida',(req,res) => {
-  const query = 'SELECT * FROM partidas';
-  
+  console.log(req.body);
+
+  const {id, juego, jugadores, fecha,hora,ganador} = req.body;
+  const query = `Update partidas set juego='${juego}',jugadores='${jugadores}',fecha='${fecha}',hora='${hora}',ganador='${ganador}' WHERE id = '${id}'`
+  connection.query(query , (err, result) => {
+    if (err){
+      console.log(err);
+      res.status(500).send({ results: null });
+    } else {
+        if(result != 0){
+          res.json(result);
+        }else{
+          res.status(404).send({results: null});
+        }
+    }
+  })
 });
 
 /**
@@ -105,10 +117,10 @@ app.post('/DeletePartida',(req,res) => {
 app.post('/login', (req, res) => {
   console.log(req.body);
   const { _username, _password } = req.body;
-  const query = `SELECT * FROM users WHERE Username = '${_username}' AND password = '${_password}'`
-
+  const query = `SELECT * FROM users WHERE email = '${_username}'`;
       connection.query(query, function (error, results, field) {
         if (error) {
+          console.log(error);
           res.status(500).send({ results: null });
         } else {//si todos OK.
           //si el usuario existe.
@@ -131,12 +143,12 @@ app.post('/login', (req, res) => {
  */
 app.post('/register', async (req, res) => {
   const { _username, _password, _email } = req.body;
+  console.log(req.body);
 
-  let id = 5;
 
   const hash = await bcrypt.hash(_password, 1);
 
-  let query = `INSERT INTO users (id,Username, User_Email, password, rols) VALUES ('${id}','${_username}', '${_email}', '${hash}', 'User')`;
+  let query = `INSERT INTO users (name, email, password, role) VALUES ('${_username}', '${_email}', '${hash}', 'User')`;
 
    connection.query(query, function (error, results, field) {
     if (error) {
@@ -148,11 +160,6 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.listen(3001,80, () => {
     console.log('Aquesta és la nostra API-REST que corre en http://localhost:3001')

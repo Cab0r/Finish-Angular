@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="py-4">
+        <form [formGroup]="UpdateForm" class="form-group" action="" method="post">
+            <div class="pb-3">
+                <label for="ID">
+                    <p>ID</p>
+                    <input placeholder="{{code}}" value="{{code}}" class="form-control" type="number" formControlName="id">
+                </label>
+            </div>
+            <div class="pb-3">
+            <label for="Juego">
+                <p>ID del juego</p>
+                <input placeholder="" class="form-control" type="text" formControlName="juego" required>
+            </label>
+        </div>
+            <div class="pb-3">
+            <label for="Jugadores">
+                <p>Nº de Jugadores</p>
+                <input class="form-control" type="number" formControlName="jugadores" required>
+            </label>
+            </div>
+            <div class="pb-3">
+            <label for="Fecha">
+                <p>Dia que se Gano</p>
+                <input class="form-control" type="text" formControlName="fecha" required>
+            </label>
+            </div>
+            <div class="pb-3">
+            <label for="Ganador" required>
+                <p>¿Quien Gano?</p>
+                <input class="form-control" type="text" formControlName="ganador" required>
+            </label>
+            </div>
+            <div class="pb-3">
+            <label for="Hora">
+                <p>Hora en que se Jugo</p>
+                <input class="form-control" type="text" formControlName="hora" required>
+            </label>
+            </div>
+            <label for="Send">
+
+                <button class="btn btn-primary" type="button" (click)="SubmitUpdateData()">Send</button>
+            </label>
+        </form>
+    </div>
+</div>

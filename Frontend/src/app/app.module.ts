@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,13 +13,13 @@ import { RegisterComponent } from './views/register/register.component';
 import { ErrorPageComponent } from './views/error-page/error-page.component';
 import { NavbarComponent } from './views/navbar/navbar.component';
 import { FooterComponent } from './views/footer/footer.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RepitePassDirective } from './directives/repite-pass.directive';
 import { RankingComponent } from './views/ranking/ranking.component';
 import { AuthInterceptorService } from './service/auth-interceptor.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CreateRankingComponent } from './views/create-ranking/create-ranking.component';
 import { AboutusComponent } from './views/aboutus/aboutus.component';
+import { UpdateRankingComponent } from './views/update-ranking/update-ranking.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +34,7 @@ import { AboutusComponent } from './views/aboutus/aboutus.component';
     RankingComponent,
     CreateRankingComponent,
     AboutusComponent,
+    UpdateRankingComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { ShowGameComponent } from './views/show-game/show-game.component';
 import { AuthguardGuard} from './guards/authguard.guard';
 import { CreateRankingComponent} from './views/create-ranking/create-ranking.component';
 import { AboutusComponent } from './views/aboutus/aboutus.component';
+import { UpdateRankingComponent } from './views/update-ranking/update-ranking.component';
 
 const routes: Routes = [
   { path: 'Home', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'Aboutus', component: AboutusComponent },
   { path: 'Ranking', component: RankingComponent, canActivate: [AuthguardGuard] },
   {path:  'Create', component: CreateRankingComponent},
+  {path: 'Update/:id', component: UpdateRankingComponent},
   { path: '', redirectTo: 'Home', pathMatch: 'full'},
   { path: '**', component: ErrorPageComponent}
 ];

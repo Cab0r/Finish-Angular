@@ -50,7 +50,7 @@ export class CreateRankingComponent {
       this.RankingForm.get(['ganador'])?.value);
 
       this.rankingService.createPartida(this.newRanking).subscribe(data => {
-        this.router.navigate(['/ranking']);
+        this.router.navigate(['/Ranking']);
       })
   }
 }
