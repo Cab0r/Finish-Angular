@@ -13,10 +13,13 @@ import { PartidasService } from 'src/app/service/partidas.service';
 
 export class CreateRankingComponent {
 
+  showSuccess = false;
+  showError500 = false;
   newRanking!: Partida;
+  
   id!: number;
   juego!: string;
-  jugadores!:  string;
+  jugadores!: string;
   fecha!: string;
   hora!: string;
   ganador!: string;
@@ -30,7 +33,40 @@ export class CreateRankingComponent {
     ganador: '',
   });
 
-  constructor(private rankingService: PartidasService,  private router: Router,private formBuilder: FormBuilder) { }
+
+  registerform = new FormGroup({
+    id: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+
+    ]),
+    juego: new FormControl('', [
+      Validators.required,
+      Validators.pattern("^[0-9]$")
+
+    ]),
+    jugadores: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+
+    ]),
+    fecha: new FormControl('', [
+      Validators.required,
+      Validators.pattern("/^[0-9]{4}\/[0-9]{1,2}\/[0-9]{2}$/")
+    ]),
+    hora: new FormControl('', [
+      Validators.required,
+      Validators.pattern("^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$")
+    ]),
+    ganador: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+
+    ])
+
+  })
+
+  constructor(private rankingService: PartidasService, private router: Router, private formBuilder: FormBuilder) { }
 
 
   /**
@@ -49,8 +85,15 @@ export class CreateRankingComponent {
       this.RankingForm.get(['hora'])?.value,
       this.RankingForm.get(['ganador'])?.value);
 
-      this.rankingService.createPartida(this.newRanking).subscribe(data => {
+    this.rankingService.createPartida(this.newRanking).subscribe(data => {
+      this.showSuccess = true;
+      setTimeout(() => {
         this.router.navigate(['/Ranking']);
-      })
+      }, 2000);
+    }, (error) => {
+      if (error.status === 500) {
+        this.showError500 = true;
+      }
+    })
   }
 }

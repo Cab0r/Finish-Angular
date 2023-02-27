@@ -55,15 +55,14 @@ app.post('/CreatePartida',(req,res) => {
   const query = `INSERT INTO partidas (id, juego, jugadores, fecha, hora, ganador) VALUES ('${id}', '${juego}', '${jugadores}', '${fecha}', '${hora}', '${ganador}');`;
 
     connection.query(query , (err, result) => {
-      if (err){
+      try {
+        if(result != 0){
+          res.json(result);
+        }else{
+          res.status(404).send({results: null});
+        }
+      } catch (error) {
         res.status(500).send({ results: null });
-        console.log(err);
-      } else {
-          if(result != 0){
-            res.json(result);
-          }else{
-            res.status(404).send({results: null});
-          }
       }
     })
 });
