@@ -75,7 +75,6 @@ app.post('/UpdatePartida',(req,res) => {
 
   const {id, juego, jugadores, fecha,hora,ganador} = req.body;
   const query = `Update partidas set juego='${juego}',jugadores='${jugadores}',fecha='${fecha}',hora='${hora}',ganador='${ganador}' WHERE id = '${id}'`
-  connection.connect();
   connection.query(query , (err, result) => {
     if (err){
       console.log(err);
@@ -88,7 +87,6 @@ app.post('/UpdatePartida',(req,res) => {
         }
     }
   })
-  connection.end();
 });
 
 /**
