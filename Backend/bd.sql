@@ -33,7 +33,7 @@ CREATE TABLE `jugadores` (
   `username` varchar(20) NOT NULL,
   `pword` varchar(20) NOT NULL,
   `mail` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `jugadores`
@@ -55,7 +55,7 @@ INSERT INTO `jugadores` (`id`, `username`, `pword`, `mail`) VALUES
 
 CREATE TABLE `palabras` (
   `palabra` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `palabras`
@@ -99,7 +99,7 @@ CREATE TABLE `partidas` (
   `fecha` varchar(20) DEFAULT NULL,
   `hora` varchar(20) DEFAULT NULL,
   `ganador` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `partidas`
@@ -121,7 +121,7 @@ INSERT INTO `partidas` (`id`, `juego`, `jugadores`, `fecha`, `hora`, `ganador`) 
 CREATE TABLE `registro` (
   `id_j` int NOT NULL,
   `id_p` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `registro`
