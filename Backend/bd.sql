@@ -201,10 +201,6 @@ ALTER TABLE `registro`
 --
 -- Filtros para la tabla `registro`
 --
-ALTER TABLE `registro`
-  ADD CONSTRAINT `registro_ibfk_1` FOREIGN KEY (`id_j`) REFERENCES `jugadores` (`id`),
-  ADD CONSTRAINT `registro_ibfk_2` FOREIGN KEY (`id_p`) REFERENCES `partidas` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

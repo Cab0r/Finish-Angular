@@ -52,9 +52,9 @@ export class RankingComponent implements OnInit {
    */
   ngOnInit(): void {
     this.rankingService.getPartidas().subscribe(
-      (data: Partida[]) => {
+      (data: any) => {
         this.ranking = data;
-        this.selectedRanking = data[1];
+        this.selectedRanking = data;
       }, (error) => {
         if (error.status === 404) {
           this.showError404 = true;

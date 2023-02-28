@@ -119,10 +119,9 @@ app.post('/login', async (req, res) => {
   console.log(req.body);
   const { _username, _password } = req.body;
 
-  const hash = await bcrypt.hash(_password, 1);
+  //const hash = await bcrypt.hash(_password, 1);
 
-  const query = `SELECT * FROM users WHERE email = '${_username}'`;
-  connection.connect();
+  const query = `SELECT * FROM users WHERE email = '${_username}' AND password = '${_password}'`;
       connection.query(query, function (error, results, field) {
           if(results.length != 0){
             const token = jwt.sign(JSON.stringify({user: _username}), 'secretpassword');
@@ -133,8 +132,6 @@ app.post('/login', async (req, res) => {
           }
        
       })  
-    connection.end();
-
 });
 
 /**
@@ -146,9 +143,9 @@ app.post('/register', async (req, res) => {
   console.log(req.body);
 
 
-  const hash = await bcrypt.hash(_password, 1);
+  //const hash = await bcrypt.hash(_password, 1);
 
-  let query = `INSERT INTO users (name, email, password, role) VALUES ('${_username}', '${_email}', '${hash}', 'User')`;
+  let query = `INSERT INTO users (name, email, password, role) VALUES ('${_username}', '${_email}', '${_password}', 'User')`;
 
    connection.query(query, function (error, results, field) {
     try {
