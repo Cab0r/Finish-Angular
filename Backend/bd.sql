@@ -152,17 +152,17 @@ INSERT INTO `registro` (`id_j`, `id_p`) VALUES
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `Username` varchar(20) NOT NULL,
-  `User_Email` varchar(30) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL,
   `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `rols` varchar(10) NOT NULL
+  `role` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `Username`, `User_Email`, `password`, `rols`) VALUES
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'Adrian', 'Adrian@UPC.com', 'password1234', 'User'),
 (2, 'pepe', 'pepe@pepe.com', 'pepe12345', 'User'),
 (2, 'pepe', 'pepe1@pepe.com', 'pepe12345', 'User'),
